@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apa itu API</title>
+</head>
+<body>
+    <script>
+        /*API(Application Programing Interface) memungkinkan pengembang untuk mengakses
+        data atau layanan dari aplikasi lain tanpa perlu memahami bagaimana aplikasi tersebut bekerja 
+        di dalamnya ,API menydiakan hal-hal tersebut seperti:
+        - mengambil data dari server
+        - mengirim data dari server
+        - mengautentikasi pengguna 
+        - mengakses layanan pihak ketiga (misalnya google maps,openwaether dsb ) 
+
+        REST API(Representational State Transfer):API berbasis HTTP yang di gunakan untuk berkomunikasi 
+        antara client dan server.
+
+        JSON(Javascript Object Notation) format data yang sering digunakan dalam komunikasi API.
+
+        HTTP Request Method
+        API biasanya bekerja melalui HTTP dengan beberapa mode standar yaitu:
+
+        1.GET: mengambil data dari server.
+        2.POST: mengirim data baru ke server.
+        3.PUT: mengganti atau memperbarui data dari server.
+        4.DELETE: mengghapus data dari server.
+
+        HTTP Status Code
+        setiap kali kita mengirim permintaan HTTP,kita akan menerima kode status sebagai respon seperti:
+
+        -200 OK: permintaan berhasil
+        -201 Created: sumberdaya berhasil di buat 
+        -400 Bad Request: permintaan tidak valid
+        -404 Not Found: : sumber daya tidak di temukan
+        -500 Internal Server Error: server mengalami kesalahan
+        */
+
+        //fetch untuk GET data
+        fetch('https://jsonplaceholder.typicode.com/posts/1')
+        .then((res) => {
+            console.log(res)
+            return res.json();
+        })
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+
+        //fetch untuk POST data
+        const postData = {
+            title: 'New Post',
+            body: 'This is the body of the new post',
+            userId: 1
+        }
+
+        fetch('https://jsonplaceholder.typicode.com/posts',{
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(postData),
+        })
+        .then((response) => response.json())
+        .then((data) => console.log('Data posted:', data))
+        .catch(error => {
+            console.error('Error posting data:', error)
+        })
+
+    </script>
+</body>
+</html>
